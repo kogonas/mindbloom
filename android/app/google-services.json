@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "423253647993",
+    "project_id": "mindbloom-81090",
+    "storage_bucket": "mindbloom-81090.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423253647993:android:1082335fac9d0db1f5eaa8",
+        "android_client_info": {
+          "package_name": "com.example.mindbloom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqqYrBknNfKAstq3T_se49tiRDDcf0wq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
