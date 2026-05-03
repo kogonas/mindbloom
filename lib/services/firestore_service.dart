@@ -52,6 +52,15 @@ Future<void> updateEntry(String entryId, String newText) async {
   });
 }
 
+Future<void> deleteEntry(String entryId) async {
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(uid)
+      .collection('entries')
+      .doc(entryId)
+      .delete();
+}
+
 
 Future<String?> uploadImage(File file) async {
   try {
