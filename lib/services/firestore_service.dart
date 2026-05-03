@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -36,6 +39,19 @@ class FirestoreService {
       'timestamp': DateTime.now(),
     });
   }
+  
+Future<String?> uploadImage(File file) async {
+  try {
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child("users/$uid/images/${DateTime.now().millisecondsSinceEpoch}.jpg");
+
+    await ref.putFile(file);
+    return await ref.getDownloadURL();
+  } catch (e) {
+    return null;
+  }
+}
 
   // Get entries
   Stream<QuerySnapshot> getEntries() {
