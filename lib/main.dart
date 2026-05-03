@@ -13,7 +13,7 @@ import 'screens/entry_detail_screen.dart';
 import 'screens/insights_screen.dart';
 import 'screens/reminders_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/edit_entry_screen.dart'; // Needed for routing if you ever call it directly
+import 'screens/edit_entry_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,9 +30,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
+      // 🌿 Global MindBloom Theme
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 16),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
+        ),
+      ),
+
       home: const LoginScreen(),
 
-      // ALL ROUTES GO HERE
       routes: {
         "/login": (_) => const LoginScreen(),
         "/register": (_) => const RegisterScreen(),
