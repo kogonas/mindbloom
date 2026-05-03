@@ -12,6 +12,8 @@ import 'screens/entry_list_screen.dart';
 import 'screens/entry_detail_screen.dart';
 import 'screens/insights_screen.dart';
 import 'screens/reminders_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/edit_entry_screen.dart'; // Needed for routing if you ever call it directly
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
+
+      // ALL ROUTES GO HERE
       routes: {
         "/login": (_) => const LoginScreen(),
         "/register": (_) => const RegisterScreen(),
@@ -38,6 +42,7 @@ class MyApp extends StatelessWidget {
         "/entries": (_) => EntryListScreen(),
         "/insights": (_) => InsightsScreen(),
         "/reminders": (_) => const RemindersScreen(),
+        "/profile": (_) => const ProfileScreen(),
       },
     );
   }
