@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 // Screens
+import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
@@ -14,6 +15,7 @@ import 'screens/insights_screen.dart';
 import 'screens/reminders_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/edit_entry_screen.dart';
+import 'screens/main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +52,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: const LoginScreen(),
+      // ⭐ Step 24B: SplashScreen is now the start screen
+      home: const SplashScreen(),
 
       routes: {
         "/login": (_) => const LoginScreen(),
@@ -62,6 +65,9 @@ class MyApp extends StatelessWidget {
         "/insights": (_) => InsightsScreen(),
         "/reminders": (_) => const RemindersScreen(),
         "/profile": (_) => const ProfileScreen(),
+
+        // ⭐ Step 23C: Bottom Navigation Route
+        "/mainNav": (_) => const MainNavigationScreen(),
       },
     );
   }
