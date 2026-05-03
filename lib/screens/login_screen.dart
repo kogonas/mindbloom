@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'register_screen.dart';
-import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -28,10 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text.trim(),
       );
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+      // ⭐ Step 23B: Navigate to MainNavigationScreen
+      Navigator.pushReplacementNamed(context, "/mainNav");
+
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message ?? "Login failed";
