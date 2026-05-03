@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool darkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +33,18 @@ class ProfileScreen extends StatelessWidget {
 
             Text("User ID: ${user?.uid ?? 'Unknown'}",
                 style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 30),
+
+            SwitchListTile(
+              title: const Text("Dark Mode"),
+              value: darkMode,
+              onChanged: (value) {
+                setState(() {
+                  darkMode = value;
+                });
+              },
+            ),
+
             const SizedBox(height: 30),
 
             ElevatedButton(
