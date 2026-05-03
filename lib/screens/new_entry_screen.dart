@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../services/firestore_service.dart';
 
 class NewEntryScreen extends StatefulWidget {
@@ -11,9 +13,43 @@ class NewEntryScreen extends StatefulWidget {
 class _NewEntryScreenState extends State<NewEntryScreen> {
   final textController = TextEditingController();
   String selectedMood = "🙂";
+  File? selectedImage;
 
   final List<String> moods = ["😀", "🙂", "😐", "😕", "😢", "😡", "😴"];
   final FirestoreService _firestore = FirestoreService();
+
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+
+    if (picked != null) {
+      setState(() {
+        selectedImage = File(picked.path);
+      });
+    }
+  }
+
+  Future<void> saveEntry() async {
+    String? imageUrl;
+
+    if (selectedImage != null) {
+      imageUrl = await _firestore.uploadImage(selectedImage!);
+    }
+
+    await _firestore.saveEntry(
+      textController.text.trim(),
+      selectedMood,
+    );
+
+    if (imageUrl != null) {
+      await _firestore.saveEntry(
+        textController.text.trim(),
+        selectedMood,
+      );
+    }
+
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +95,20 @@ class _NewEntryScreenState extends State<NewEntryScreen> {
 
             const SizedBox(height: 20),
 
+            if (selectedImage != null)
+              Image.file(selectedImage!, height: 150),
+
+            const SizedBox(height: 10),
+
             ElevatedButton(
-              onPressed: () async {
-                await _firestore.saveEntry(
-                  textController.text.trim(),
-                  selectedMood,
-                );
-                Navigator.pop(context);
-              },
+              onPressed: pickImage,
+              child: const Text("Upload Image"),
+            ),
+
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: saveEntry,
               child: const Text("Save Entry"),
             )
           ],
