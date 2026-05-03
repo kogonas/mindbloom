@@ -56,55 +56,69 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Create Account", style: TextStyle(fontSize: 28)),
-            const SizedBox(height: 30),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Text(
+                  "Create Account",
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 40),
 
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: "Email"),
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: "Email",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: "Password",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                TextField(
+                  controller: confirmController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: "Confirm Password",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                if (errorMessage.isNotEmpty)
+                  Text(errorMessage, style: const TextStyle(color: Colors.red)),
+
+                const SizedBox(height: 20),
+
+                ElevatedButton(
+                  onPressed: loading ? null : register,
+                  child: loading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text("Create Account"),
+                ),
+
+                const SizedBox(height: 20),
+
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/login");
+                  },
+                  child: const Text("Back to Login"),
+                )
+              ],
             ),
-
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: "Password"),
-            ),
-
-            TextField(
-              controller: confirmController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: "Confirm Password"),
-            ),
-
-            const SizedBox(height: 20),
-
-            if (errorMessage.isNotEmpty)
-              Text(errorMessage, style: const TextStyle(color: Colors.red)),
-
-            const SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: loading ? null : register,
-              child: loading
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text("Create Account"),
-            ),
-
-            const SizedBox(height: 20),
-
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                );
-              },
-              child: const Text("Back to Login"),
-            )
-          ],
+          ),
         ),
       ),
     );
