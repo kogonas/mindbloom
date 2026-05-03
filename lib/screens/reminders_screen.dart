@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../services/notification_service.dart';
 
 class RemindersScreen extends StatefulWidget {
   const RemindersScreen({super.key});
@@ -21,38 +20,18 @@ class _RemindersScreenState extends State<RemindersScreen> {
         child: Column(
           children: [
             SwitchListTile(
-              title: const Text("Daily Journaling Reminder (8:00 PM)"),
+              title: const Text("Daily Journaling Reminder"),
               value: journalReminder,
-              onChanged: (v) async {
+              onChanged: (v) {
                 setState(() => journalReminder = v);
-
-                if (v) {
-                  await NotificationService.scheduleDailyNotification(
-                    id: 1,
-                    title: "MindBloom",
-                    body: "Take a moment to journal your thoughts today 🌿",
-                    hour: 20,
-                    minute: 0,
-                  );
-                }
               },
             ),
 
             SwitchListTile(
-              title: const Text("Daily Mood Check-In (9:00 AM)"),
+              title: const Text("Daily Mood Check-In"),
               value: moodReminder,
-              onChanged: (v) async {
+              onChanged: (v) {
                 setState(() => moodReminder = v);
-
-                if (v) {
-                  await NotificationService.scheduleDailyNotification(
-                    id: 2,
-                    title: "MindBloom",
-                    body: "How are you feeling today?",
-                    hour: 9,
-                    minute: 0,
-                  );
-                }
               },
             ),
           ],
