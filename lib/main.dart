@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+
+// Providers
+import 'providers/theme_provider.dart';
 
 // Screens
 import 'screens/splash_screen.dart';
@@ -22,7 +26,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,29 +40,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      // 🌿 Global MindBloom Theme
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.green,
         scaffoldBackgroundColor: Colors.white,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 16),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-          ),
-        ),
       ),
 
-      // ⭐ Step 24B: SplashScreen is now the start screen
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.green,
+      ),
+
+      themeMode: themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
+
       home: const SplashScreen(),
 
       routes: {
@@ -65,8 +70,6 @@ class MyApp extends StatelessWidget {
         "/insights": (_) => InsightsScreen(),
         "/reminders": (_) => const RemindersScreen(),
         "/profile": (_) => const ProfileScreen(),
-
-        // ⭐ Step 23C: Bottom Navigation Route
         "/mainNav": (_) => const MainNavigationScreen(),
       },
     );
