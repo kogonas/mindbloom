@@ -1,14 +1,22 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_local_notifications/src/platform_specifics/android/notification_details.dart';
+
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
 
   static Future<void> init() async {
+    // Initialize timezone
     tz.initializeTimeZones();
+    final String currentTimeZone =
+        await FlutterNativeTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
 
+    // Android settings
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
     const settings = InitializationSettings(android: android);
 
@@ -32,6 +40,7 @@ class NotificationService {
           'daily_channel',
           'Daily Notifications',
           importance: Importance.high,
+          priority: Priority.high,
         ),
       ),
       androidAllowWhileIdle: true,
