@@ -23,8 +23,62 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(
-        child: Text("Welcome to MindBloom 🌿"),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Welcome to MindBloom 🌿",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 30),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/mood");
+              },
+              child: const Text("Add Mood"),
+            ),
+
+            const SizedBox(height: 10),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/newEntry");
+              },
+              child: const Text("New Journal Entry"),
+            ),
+
+            const SizedBox(height: 10),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/entries");
+              },
+              child: const Text("View Entries"),
+            ),
+
+            const SizedBox(height: 10),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/insights");
+              },
+              child: const Text("Insights"),
+            ),
+
+            const SizedBox(height: 10),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/reminders");
+              },
+              child: const Text("Wellness Reminders"),
+            ),
+          ],
+        ),
       ),
     );
   }
