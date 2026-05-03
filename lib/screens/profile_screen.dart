@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -10,11 +12,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool darkMode = false;
-
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text("Profile")),
@@ -37,11 +38,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             SwitchListTile(
               title: const Text("Dark Mode"),
-              value: darkMode,
+              value: themeProvider.isDark,
               onChanged: (value) {
-                setState(() {
-                  darkMode = value;
-                });
+                themeProvider.toggleTheme(value);
               },
             ),
 
