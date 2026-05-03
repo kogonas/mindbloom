@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 // Providers
 import 'providers/theme_provider.dart';
 
+// Services
+import 'services/notification_service.dart';
+
 // Screens
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
@@ -26,6 +29,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await NotificationService.init();
 
   runApp(
     ChangeNotifierProvider(
@@ -67,7 +72,7 @@ class MyApp extends StatelessWidget {
         "/mood": (_) => MoodScreen(),
         "/newEntry": (_) => const NewEntryScreen(),
         "/entries": (_) => EntryListScreen(),
-        "/insights": (_) => InsightsScreen(),
+        "/insights": (_) => const InsightsScreen(),
         "/reminders": (_) => const RemindersScreen(),
         "/profile": (_) => const ProfileScreen(),
         "/mainNav": (_) => const MainNavigationScreen(),
