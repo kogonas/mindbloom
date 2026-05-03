@@ -39,7 +39,20 @@ class FirestoreService {
       'timestamp': DateTime.now(),
     });
   }
-  
+
+Future<void> updateEntry(String entryId, String newText) async {
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(uid)
+      .collection('entries')
+      .doc(entryId)
+      .update({
+    'text': newText,
+    'timestamp': DateTime.now(),
+  });
+}
+
+
 Future<String?> uploadImage(File file) async {
   try {
     final ref = FirebaseStorage.instance
