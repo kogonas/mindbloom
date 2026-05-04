@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mindbloom"
-        minSdk = 21
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

@@ -14,11 +14,9 @@ import 'screens/home_screen.dart';
 import 'screens/mood_screen.dart';
 import 'screens/new_entry_screen.dart';
 import 'screens/entry_list_screen.dart';
-import 'screens/entry_detail_screen.dart';
 import 'screens/insights_screen.dart';
 import 'screens/reminders_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/edit_entry_screen.dart';
 import 'screens/main_navigation_screen.dart';
 
 void main() async {

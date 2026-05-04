@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'entry_detail_screen.dart';
 
 class EntryListScreen extends StatefulWidget {
+  const EntryListScreen({super.key});
+
   @override
   State<EntryListScreen> createState() => _EntryListScreenState();
 }
