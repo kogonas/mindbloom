@@ -3,6 +3,7 @@ import 'home_screen.dart';
 import 'entry_list_screen.dart';
 import 'insights_screen.dart';
 import 'profile_screen.dart';
+import 'settings_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -17,8 +18,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final screens = [
     const HomeScreen(),
     EntryListScreen(),
-    InsightsScreen(),
+    const InsightsScreen(),
     const ProfileScreen(),
+    const SettingsScreen(),
   ];
 
   @override
@@ -26,12 +28,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Scaffold(
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
-        transitionBuilder: (child, animation) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
-        },
         child: IndexedStack(
           key: ValueKey<int>(currentIndex),
           index: currentIndex,
@@ -63,6 +59,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
           ),
         ],
       ),
