@@ -44,10 +44,9 @@ class _EntryListScreenState extends State<EntryListScreen> {
                   .collection("users")
                   .doc(uid)
                   .collection("entries")
-                  .orderBy("timestamp", descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
+                if (!snapshot.hasData || snapshot.data == null) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
@@ -74,7 +73,6 @@ class _EntryListScreenState extends State<EntryListScreen> {
                     final entry = filtered[index];
                     final title = entry["title"] ?? "Untitled";
                     final content = entry["content"] ?? "";
-                    final id = entry.id;
 
                     return ListTile(
                       title: Text(title),
@@ -87,7 +85,7 @@ class _EntryListScreenState extends State<EntryListScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => EntryDetailScreen(entryId: id),
+                            builder: (_) => EntryDetailScreen(entry: entry),
                           ),
                         );
                       },
